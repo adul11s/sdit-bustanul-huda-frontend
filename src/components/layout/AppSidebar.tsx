@@ -252,7 +252,7 @@ export function AppSidebar() {
             NI
           </div>
           <div>
-            <h2 className="font-bold text-slate-900 text-lg">Nurul Islam</h2>
+            <h2 className="font-bold text-slate-900 text-lg">Bustanul Huda</h2>
             <p className="text-[10px] text-slate-400 font-medium">School Management</p>
           </div>
         </div>

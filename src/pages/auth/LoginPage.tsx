@@ -44,7 +44,7 @@ export function LoginPage() {
             <div className="bg-white/15 p-3 rounded-2xl backdrop-blur-sm border border-white/20">
               <GraduationCap className="h-10 w-10 text-white" />
             </div>
-            <h1 className="text-4xl font-bold tracking-tight">Nurul Islam</h1>
+            <h1 className="text-4xl font-bold tracking-tight">Bustanul Huda</h1>
           </div>
           <p className="text-xl text-emerald-100 max-w-lg leading-relaxed">
             Sistem Manajemen Sekolah Modern untuk Lembaga Pendidikan Islam Terdepan.

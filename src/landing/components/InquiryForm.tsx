@@ -70,7 +70,7 @@ export function InquiryForm() {
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-6">Daftar Sekarang</h2>
             <div className="w-16 h-1 bg-emerald-500 rounded-full mb-6" />
             <p className="text-slate-600 leading-relaxed mb-8">
-              Isi formulir di samping untuk mendaftarkan putra/putri Anda di Nurul Islam. Tim admissions kami akan segera menghubungi Anda untuk proses selanjutnya.
+              Isi formulir di samping untuk mendaftarkan putra/putri Anda di Bustanul Huda. Tim admissions kami akan segera menghubungi Anda untuk proses selanjutnya.
             </p>
 
             <div className="space-y-4">
