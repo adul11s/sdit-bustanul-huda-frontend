@@ -12,8 +12,8 @@ describe('HeroSection', () => {
   it('renders school name and tagline', () => {
     render(<HeroSection />);
     
-    expect(screen.getByText('Nurul Islam')).toBeInTheDocument();
-    expect(screen.getByText(/Membangun Generasi/)).toBeInTheDocument();
+    expect(screen.getByText('SDIT Bustanul Huda')).toBeInTheDocument();
+    expect(screen.getByText('Sekolah Unggulan Berkarakter Islami')).toBeInTheDocument();
   });
 
   it('renders CTA buttons', () => {
@@ -44,7 +44,7 @@ describe('ProfileSection', () => {
   it('renders vision and mission content', () => {
     render(<ProfileSection />);
     
-    expect(screen.getByText(/Menjadi lembaga pendidikan Islam unggul/)).toBeInTheDocument();
+    expect(screen.getByText(/Menjadi sekolah Islam unggul/)).toBeInTheDocument();
     expect(screen.getByText(/Menyelenggarakan pendidikan Islam/)).toBeInTheDocument();
   });
 });
