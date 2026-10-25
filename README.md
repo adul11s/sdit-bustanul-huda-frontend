@@ -51,12 +51,18 @@ src/
 └── App.tsx         # Main app component
 ```
 
+## Demo
+
+Frontend production: **https://sdit-bustanul-huda-frontend.vercel.app** (deploy OTA via `vercel deploy --prod`, project `adul11s-projects/sdit-bustanul-huda-frontend`).
+
+Backend: **TODO: deploy menunggu hosting — CI bukti test** (lihat [README backend](https://github.com/adul11s/sdit-bustanul-huda-backend#deployment--demo): CI hijau, 28/28 test; deploy asli menunggu database Postgres tersedia publik).
+
 ## Configuration
 
 Set `VITE_API_URL` in `.env` to point to the backend API URL.
 ## Known gaps
 
-- Belum ada Docker, seed data deterministik, video demo, atau live link.
+- Belum ada Docker, seed data deterministik, atau video demo (live link & CI tersedia di atas).
 - TypeScript non-strict (strict hanya TODO untuk file baru); belum ada lint config.
 - Belum ada threat model, authz matrix, atau audit log; auth masih sederhana.
 - Belum ada metrics/alerting/runbook; API proxy hanya untuk dev.
