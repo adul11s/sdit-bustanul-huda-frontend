@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../../../components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../../../components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "../../../components/ui/card";
 import { Input } from "../../../components/ui/input";
 import { Badge } from "../../../components/ui/badge";
 import { Label } from "../../../components/ui/label";
@@ -81,7 +81,7 @@ export default function CalendarAdminPage() {
       const res = await fetch("/api/admin/calendar-events");
       const data = await res.json();
       if (data.success) setEvents(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load calendar events");
     } finally {
       setLoading(false);
@@ -108,7 +108,7 @@ export default function CalendarAdminPage() {
       } else {
         toast.error(data.error || "Failed to save");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to save event");
     }
   };
@@ -124,7 +124,7 @@ export default function CalendarAdminPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to delete");
     }
   };
@@ -197,7 +197,7 @@ export default function CalendarAdminPage() {
                 </div>
                 <div>
                   <Label>Type</Label>
-                  <Select value={form.type} onValueChange={(v) => setForm({ ...form, type: v })}>
+                  <Select value={form.type} onValueChange={(v) => setForm({ ...form, type: v ?? '' })}>
                     <SelectTrigger className="mt-2"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       {Object.entries(EVENT_TYPE_LABELS).map(([value, label]) => (

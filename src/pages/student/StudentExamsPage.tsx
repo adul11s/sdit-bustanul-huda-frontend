@@ -35,7 +35,7 @@ export default function StudentExamsPage() {
       if (json.success) {
         setExams(json.data.data || []);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to load exams");
     } finally {
       setLoading(false);

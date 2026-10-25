@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../..
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
 import { toast } from "sonner";
-import { Loader2, Clock, FileText, Pen, BookOpen, ArrowLeft, CheckCircle, AlertCircle } from "lucide-react";
+import { Loader2, Clock, Pen, BookOpen, ArrowLeft, CheckCircle, AlertCircle } from "lucide-react";
 
 interface AssignmentSubmission {
   id: string;
@@ -58,7 +58,7 @@ export default function StudentAssignmentsPage() {
       if (json.success) {
         setAssignments(json.data || []);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to load assignments");
     } finally {
       setLoading(false);
@@ -174,7 +174,7 @@ export default function StudentAssignmentsPage() {
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="text-center py-2">
-                          {score !== null ? (
+                          {score != null ? (
                             <>
                               <p className="text-3xl font-bold text-emerald-600">{score}/{assignment.points}</p>
                               <p className="text-sm text-muted-foreground">

@@ -99,7 +99,7 @@ export default function UsersPage() {
         setUsers(data.data);
         setTotal(data.total);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to load users");
     } finally {
       setLoading(false);
@@ -123,7 +123,7 @@ export default function UsersPage() {
       } else {
         toast.error(data.error || "Failed to create user");
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to create user");
     }
   };
@@ -146,7 +146,7 @@ export default function UsersPage() {
       } else {
         toast.error(data.error || "Failed to update user");
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to update user");
     }
   };
@@ -175,7 +175,7 @@ export default function UsersPage() {
         });
         setCsvPreview(parsed);
         setCsvErrors(errs);
-      } catch (err) {
+      } catch {
         setCsvErrors(["Failed to parse CSV"]); setCsvPreview([]);
       }
     };
@@ -201,7 +201,7 @@ export default function UsersPage() {
       } else {
         toast.error(data.error || "Failed to create users");
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to bulk create users");
     } finally { setBulkLoading(false); }
   };
@@ -224,7 +224,7 @@ export default function UsersPage() {
       const data = await res.json();
       if (data.success) { toast.success("User deactivated"); loadUsers(); }
       else { toast.error(data.error); }
-    } catch (error) { toast.error("Failed to delete user"); }
+    } catch { toast.error("Failed to delete user"); }
   };
 
   const openEdit = (user: User) => {
@@ -266,7 +266,7 @@ export default function UsersPage() {
               <div className="grid gap-2"><Label>Password</Label><Input type="password" required value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} /></div>
               <div className="grid gap-2">
                 <Label>Role</Label>
-                <Select value={formData.role} onValueChange={(v) => setFormData({ ...formData, role: v })}>
+                <Select value={formData.role} onValueChange={(v) => setFormData({ ...formData, role: v ?? '' })}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>{roles.map((r) => (<SelectItem key={r} value={r}>{r.replace("_", " ")}</SelectItem>))}</SelectContent>
                 </Select>
@@ -274,7 +274,7 @@ export default function UsersPage() {
               <div className="grid gap-2"><Label>Phone</Label><Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} /></div>
               <div className="grid gap-2">
                 <Label>Gender</Label>
-                <Select value={formData.gender} onValueChange={(v) => setFormData({ ...formData, gender: v })}>
+                <Select value={formData.gender} onValueChange={(v) => setFormData({ ...formData, gender: v ?? '' })}>
                   <SelectTrigger><SelectValue placeholder="Select gender" /></SelectTrigger>
                   <SelectContent>{genders.map((g) => (<SelectItem key={g} value={g}>{g}</SelectItem>))}</SelectContent>
                 </Select>
@@ -295,7 +295,7 @@ export default function UsersPage() {
               <div className="grid gap-2"><Label>Phone</Label><Input value={editForm.phone} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} /></div>
               <div className="grid gap-2">
                 <Label>Gender</Label>
-                <Select value={editForm.gender} onValueChange={(v) => setEditForm({ ...editForm, gender: v })}>
+                <Select value={editForm.gender} onValueChange={(v) => setEditForm({ ...editForm, gender: v ?? '' })}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>{genders.map((g) => (<SelectItem key={g} value={g}>{g}</SelectItem>))}</SelectContent>
                 </Select>
@@ -426,7 +426,7 @@ export default function UsersPage() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                 <Input placeholder="Search..." className="pl-9 w-64" value={search} onChange={(e) => setSearch(e.target.value)} />
               </div>
-              <Select value={roleFilter} onValueChange={(v) => { setRoleFilter(v); setPage(1); }}>
+              <Select value={roleFilter} onValueChange={(v) => { setRoleFilter(v ?? ''); setPage(1); }}>
                 <SelectTrigger className="w-40"><SelectValue placeholder="All Roles" /></SelectTrigger>
                 <SelectContent><SelectItem value="">All Roles</SelectItem>{roles.map((r) => (<SelectItem key={r} value={r}>{r.replace("_", " ")}</SelectItem>))}</SelectContent>
               </Select>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../../../components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../../../components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "../../../components/ui/card";
 import { Input } from "../../../components/ui/input";
 import { Badge } from "../../../components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
@@ -85,7 +85,7 @@ export default function AdminSchedulePage() {
       if (subjectsData.success) setSubjects(subjectsData.data);
       if (levelsData.success) setLevels(levelsData.data);
       if (yearsData.success) setYears(yearsData.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load metadata");
     }
   };
@@ -99,7 +99,7 @@ export default function AdminSchedulePage() {
       const res = await fetch(`/api/admin/schedules?${params}`);
       const data = await res.json();
       if (data.success) setSchedules(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load schedules");
     } finally {
       setLoading(false);
@@ -130,7 +130,7 @@ export default function AdminSchedulePage() {
       } else {
         toast.error(data.error || "Failed to create schedule");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to create schedule");
     }
   };
@@ -171,7 +171,7 @@ export default function AdminSchedulePage() {
                 )}
                 <div>
                   <Label>Academic Year</Label>
-                  <Select value={form.academicYearId} onValueChange={(v) => setForm({ ...form, academicYearId: v })}>
+                  <Select value={form.academicYearId} onValueChange={(v) => setForm({ ...form, academicYearId: v ?? '' })}>
                     <SelectTrigger className="mt-2"><SelectValue placeholder="Select year">{years.find(y => y.id === form.academicYearId)?.name}</SelectValue></SelectTrigger>
                     <SelectContent>
                       {years.map((y) => (
@@ -182,7 +182,7 @@ export default function AdminSchedulePage() {
                 </div>
                 <div>
                   <Label>Class</Label>
-                  <Select value={form.classId} onValueChange={(v) => setForm({ ...form, classId: v })}>
+                  <Select value={form.classId} onValueChange={(v) => setForm({ ...form, classId: v ?? '' })}>
                     <SelectTrigger className="mt-2"><SelectValue placeholder="Select class">{allClasses.find(c => c.id === form.classId)?.levelName} - {allClasses.find(c => c.id === form.classId)?.name}</SelectValue></SelectTrigger>
                     <SelectContent>
                       {allClasses.map((c) => (
@@ -193,7 +193,7 @@ export default function AdminSchedulePage() {
                 </div>
                 <div>
                   <Label>Subject</Label>
-                  <Select value={form.subjectId} onValueChange={(v) => setForm({ ...form, subjectId: v })}>
+                  <Select value={form.subjectId} onValueChange={(v) => setForm({ ...form, subjectId: v ?? '' })}>
                     <SelectTrigger className="mt-2"><SelectValue placeholder="Select subject">{subjects.find(s => s.id === form.subjectId)?.name}</SelectValue></SelectTrigger>
                     <SelectContent>
                       {subjects.map((s) => (
@@ -204,7 +204,7 @@ export default function AdminSchedulePage() {
                 </div>
                 <div>
                   <Label>Day</Label>
-                  <Select value={form.dayOfWeek} onValueChange={(v) => setForm({ ...form, dayOfWeek: v })}>
+                  <Select value={form.dayOfWeek} onValueChange={(v) => setForm({ ...form, dayOfWeek: v ?? '' })}>
                     <SelectTrigger className="mt-2"><SelectValue placeholder="Select day" /></SelectTrigger>
                     <SelectContent>
                       {DAYS.map((d, i) => (
@@ -241,7 +241,7 @@ export default function AdminSchedulePage() {
           <CardTitle className="text-base">Filter</CardTitle>
         </CardHeader>
         <CardContent className="flex gap-4 flex-wrap">
-          <Select value={filters.classId} onValueChange={(v) => setFilters({ ...filters, classId: v })}>
+          <Select value={filters.classId} onValueChange={(v) => setFilters({ ...filters, classId: v ?? '' })}>
             <SelectTrigger className="w-64"><SelectValue placeholder="Select class">{allClasses.find(c => c.id === filters.classId)?.levelName} - {allClasses.find(c => c.id === filters.classId)?.name}</SelectValue></SelectTrigger>
             <SelectContent>
               <SelectItem value="">All Classes</SelectItem>
@@ -250,7 +250,7 @@ export default function AdminSchedulePage() {
               ))}
             </SelectContent>
           </Select>
-          <Select value={filters.academicYearId} onValueChange={(v) => setFilters({ ...filters, academicYearId: v })}>
+          <Select value={filters.academicYearId} onValueChange={(v) => setFilters({ ...filters, academicYearId: v ?? '' })}>
             <SelectTrigger className="w-64"><SelectValue placeholder="Select academic year">{years.find(y => y.id === filters.academicYearId)?.name}</SelectValue></SelectTrigger>
             <SelectContent>
               <SelectItem value="">All Years</SelectItem>

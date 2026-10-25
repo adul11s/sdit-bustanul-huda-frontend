@@ -79,7 +79,7 @@ export default function HomeroomAttendanceMonthlyPage() {
         setDates(json.dates);
         setHolidays(json.holidays || []);
       }
-    } catch (err) {
+    } catch {
       toast.error('Gagal memuat rekap bulanan');
     } finally {
       setLoading(false);
@@ -329,9 +329,10 @@ export default function HomeroomAttendanceMonthlyPage() {
                         const cell = getCellData(s.studentId, date);
                         const status = cell?.status;
                         const isNonPresent = status && status !== 'PRESENT';
+                        const statusLabel = status ? (STATUS_LABELS[status] ?? status) : '';
                         const tooltip = cell?.note
-                          ? `${STATUS_LABELS[status]} — ${cell.note}`
-                          : STATUS_LABELS[status] || '';
+                          ? `${statusLabel} — ${cell.note}`
+                          : statusLabel;
                         return (
                           <td key={date} className="text-center px-1 py-2">
                             {isNonPresent ? (

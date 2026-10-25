@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import DashboardLayout from '../../components/layout/DashboardLayout';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../../../components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
-import { Badge } from '../../../components/ui/badge';
 import { toast } from 'sonner';
-import { Loader2, Calendar, CheckCircle, XCircle, AlertCircle, Clock, Save, AlertTriangle, BookOpen } from 'lucide-react';
+import { Loader2, CheckCircle, XCircle, AlertCircle, Clock, Save, AlertTriangle, BookOpen } from 'lucide-react';
 
 interface StudentAttendance {
   id: string;
@@ -139,7 +138,7 @@ export default function TeacherAttendancePage() {
 
       toast.success('Absensi berhasil disimpan');
       loadAttendance();
-    } catch (err) {
+    } catch {
       toast.error('Gagal menyimpan absensi');
     } finally {
       setSaving(false);

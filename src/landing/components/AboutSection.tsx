@@ -1,6 +1,5 @@
 import { CheckCircle2 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { SCHOOL_NAME } from '../data/school-data';
 
 const FEATURES = [
   'Kurikulum Merdeka',

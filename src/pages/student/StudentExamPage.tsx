@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useStudentExam } from '../../hooks/use-exam';
-import { QuestionType, SubmissionStatus } from '../../interfaces/exam.types';
+import { QuestionType } from '../../interfaces/exam.types';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../components/ui/card';
 import { Textarea } from '../../../components/ui/textarea';
@@ -13,8 +13,7 @@ import {
   ArrowRight,
   Send,
   Save,
-  Timer,
-  AlertTriangle
+  Timer
 } from 'lucide-react';
 
 export function StudentExamPage() {
@@ -28,10 +27,8 @@ export function StudentExamPage() {
     error,
     currentQuestionIndex,
     setCurrentQuestionIndex,
-    currentQuestion,
     answeredCount,
     totalQuestions,
-    progress,
     startExam,
     submitAnswer,
     submitExam,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '../../components/layout/DashboardLayout';
-import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
+import { Card, CardContent } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
 import { toast } from 'sonner';
@@ -50,7 +50,7 @@ export default function HomeroomAttendancePage() {
         });
         setRecords(map);
       }
-    } catch (err) {
+    } catch {
       toast.error('Gagal memuat data absensi');
     } finally {
       setLoading(false);
@@ -91,7 +91,7 @@ export default function HomeroomAttendancePage() {
       } else {
         toast.error(json.error || 'Gagal menyimpan');
       }
-    } catch (err) {
+    } catch {
       toast.error('Gagal menyimpan absensi');
     } finally {
       setSaving(false);

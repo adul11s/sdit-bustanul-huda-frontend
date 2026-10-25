@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { Badge } from "../../../components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "../../../components/ui/sheet";
 import { toast } from "sonner";
-import { Loader2, BarChart3, Clock, Calendar, X } from "lucide-react";
+import { Loader2, BarChart3, Clock, Calendar } from "lucide-react";
 
 interface ScheduleDetail {
   id: string;
@@ -35,7 +35,7 @@ export default function AdminWorkloadPage() {
   const [workloads, setWorkloads] = useState<Array<{ teacherId: string; teacherName: string; averageWeeklyHours: number }>>([]);
   const [loading, setLoading] = useState(true);
   const [detailLoading, setDetailLoading] = useState(false);
-  const [selectedTeacherId, setSelectedTeacherId] = useState<string | null>(null);
+  const [, setSelectedTeacherId] = useState<string | null>(null);
   const [detail, setDetail] = useState<WorkloadDetail | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -49,7 +49,7 @@ export default function AdminWorkloadPage() {
       const res = await fetch("/api/admin/workload");
       const data = await res.json();
       if (data.success) setWorkloads(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load workload data");
     } finally {
       setLoading(false);
@@ -64,7 +64,7 @@ export default function AdminWorkloadPage() {
       const res = await fetch(`/api/admin/workload/${teacherId}/detail`);
       const data = await res.json();
       if (data.success) setDetail(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load workload detail");
     } finally {
       setDetailLoading(false);

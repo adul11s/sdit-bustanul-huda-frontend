@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useBulletins } from '../hooks/useBulletins';
-import { useInquiry } from '../hooks/useInquiry';
 import { format } from 'date-fns';
 
 const ANNOUNCEMENT_BADGE_COLORS: Record<string, string> = {

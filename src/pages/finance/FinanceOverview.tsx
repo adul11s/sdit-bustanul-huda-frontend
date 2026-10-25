@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs";
 import { toast } from "sonner";
-import { Loader2, DollarSign, TrendingUp, Plus, CreditCard, History, Users, Search, X, ArrowLeft, Receipt, Calendar, FileText } from "lucide-react";
+import { Loader2, DollarSign, Plus, CreditCard, History, Search, Receipt } from "lucide-react";
 // Types inlined to avoid module resolution issue in this file
 interface Invoice {
   id: string;
@@ -142,7 +142,7 @@ export default function FinanceOverview() {
             }))
           );
         }
-      } catch (err) { /* silent */ }
+      } catch { /* silent */ }
     };
     loadMeta();
   }, []);
@@ -167,7 +167,7 @@ export default function FinanceOverview() {
       if (invoicesData.success) setInvoices(invoicesData.data);
       if (reportData.success) setReport(reportData.data);
       if (overdueData.success) setOverdue(overdueData.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load data");
     } finally {
       setLoading(false);
@@ -204,7 +204,7 @@ export default function FinanceOverview() {
       } else {
         toast.error(data.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to create invoice");
     } finally { setInvoiceCreating(false); }
   };
@@ -215,8 +215,8 @@ export default function FinanceOverview() {
   };
 
   const openPaymentDialog = (invoice: Invoice) => {
-    setSelectedInvoice(invoice);
     const remaining = invoice.amount - invoice.paidAmount;
+    setSelectedInvoice(invoice);
     setPaymentForm({
       amount: remaining > 0 ? remaining : 0,
       method: "CASH",
@@ -227,7 +227,6 @@ export default function FinanceOverview() {
   };
 
   const getPaymentButtonLabel = (invoice: Invoice) => {
-    const remaining = invoice.amount - invoice.paidAmount;
     if (invoice.status === "PAID") return "Add Payment";
     if (invoice.paidAmount === 0) return "Record Full Payment";
     return "Record Partial Payment";
@@ -266,7 +265,7 @@ export default function FinanceOverview() {
       } else {
         toast.error(data.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to record payment");
     } finally { setPaymentLoading(false); }
   };
@@ -280,7 +279,7 @@ export default function FinanceOverview() {
       const data = await res.json();
       if (data.success) setHistoryPayments(data.data);
       else setHistoryPayments([]);
-    } catch (error) {
+    } catch {
       setHistoryPayments([]);
     } finally { setHistoryLoading(false); }
   };
@@ -383,7 +382,7 @@ export default function FinanceOverview() {
             {invoiceTargetType === 'CLASS' && (
               <div className="space-y-2">
                 <Label>Select Class</Label>
-                <Select value={invoiceForm.classId} onValueChange={(v) => setInvoiceForm((prev) => ({ ...prev, classId: v }))}>
+                <Select value={invoiceForm.classId} onValueChange={(v) => setInvoiceForm((prev) => ({ ...prev, classId: v ?? '' }))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Choose a class">
                       {(() => {
@@ -436,7 +435,7 @@ export default function FinanceOverview() {
               </div>
               <div className="space-y-2">
                 <Label>Type</Label>
-                <Select value={invoiceForm.type} onValueChange={(v) => setInvoiceForm((prev) => ({ ...prev, type: v }))}>
+                <Select value={invoiceForm.type} onValueChange={(v) => setInvoiceForm((prev) => ({ ...prev, type: v ?? '' }))}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="TUITION">Tuition (SPP)</SelectItem>
@@ -502,7 +501,7 @@ export default function FinanceOverview() {
             </div>
             <div className="space-y-2">
               <Label>Method</Label>
-              <Select value={paymentForm.method} onValueChange={(v) => setPaymentForm((prev) => ({ ...prev, method: v }))}>
+              <Select value={paymentForm.method} onValueChange={(v) => setPaymentForm((prev) => ({ ...prev, method: v ?? '' }))}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="CASH">Cash</SelectItem>
@@ -590,7 +589,7 @@ export default function FinanceOverview() {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                     <Input placeholder="Search student or title..." className="pl-9 w-56" value={search} onChange={(e) => setSearch(e.target.value)} />
                   </div>
-                  <Select value={statusFilter} onValueChange={(value) => { setStatusFilter(value); setPage(1); }}>
+                  <Select value={statusFilter} onValueChange={(value) => { setStatusFilter(value ?? ''); setPage(1); }}>
                     <SelectTrigger className="w-36">
                       <SelectValue placeholder="All" />
                     </SelectTrigger>

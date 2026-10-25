@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import DashboardLayout from '../../components/layout/DashboardLayout';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../../../components/ui/card';
+import { Card, CardContent } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { Badge } from '../../../components/ui/badge';
 import { toast } from 'sonner';
-import { Loader2, Save, TrendingUp, FileText, GraduationCap, ClipboardList, Eye, ChevronDown, ChevronUp, Users } from 'lucide-react';
+import { Loader2, Save, FileText, GraduationCap, Eye, ChevronUp, Users } from 'lucide-react';
 
 interface StudentGrade {
   id: string;
@@ -217,7 +217,7 @@ export default function TeacherGradePage() {
       }
       toast.success('Nilai berhasil disimpan');
       loadStudents();
-    } catch (err) {
+    } catch {
       toast.error('Gagal menyimpan nilai');
     } finally {
       setSaving(false);

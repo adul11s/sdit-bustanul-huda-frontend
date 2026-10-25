@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../../components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Label } from '../../../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 import { Textarea } from '../../../components/ui/textarea';
@@ -20,8 +20,7 @@ import {
   CheckCircle,
   Clock,
   Users,
-  Puzzle,
-  Download
+  Puzzle
 } from 'lucide-react';
 
 interface QuestionFormData {
@@ -41,11 +40,10 @@ const initialQuestionForm: QuestionFormData = {
 };
 
 export function ExamDetailPage({ examId }: { examId: string }) {
-  const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   const { exam, loading: examLoading, refetch } = useExam(examId);
-  const { questions, loading: questionsLoading, createQuestion, deleteQuestion, uploadFromFile, refetch: refetchQuestions } = useQuestionManager(examId);
+  const { questions, loading: questionsLoading, createQuestion, deleteQuestion, uploadFromFile } = useQuestionManager(examId);
   
   const [questionForm, setQuestionForm] = useState<QuestionFormData>(initialQuestionForm);
   const [editingQuestion, setEditingQuestion] = useState<IQuestion | null>(null);
@@ -288,7 +286,7 @@ export function ExamDetailPage({ examId }: { examId: string }) {
                       <Label>Correct Answer *</Label>
                       <Select
                         value={questionForm.correctAnswer}
-                        onValueChange={(v) => setQuestionForm({ ...questionForm, correctAnswer: v })}
+                        onValueChange={(v) => setQuestionForm({ ...questionForm, correctAnswer: v ?? '' })}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Select correct answer" />

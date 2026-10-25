@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import DashboardLayout from "../../components/layout/DashboardLayout";
 import { Card, CardHeader, CardTitle, CardContent } from "../../../components/ui/card";
 import { Users, GraduationCap, BookOpen, Calculator, TrendingUp, UserPlus, ArrowRight, Calendar } from "lucide-react";
 import { Button } from "../../../components/ui/button";

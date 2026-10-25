@@ -69,7 +69,7 @@ export default function StudentAssignmentPage() {
           editor.commands.setContent(json.data.submission.content);
         }
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to load assignment");
       navigate('/student/assignments');
     } finally {
@@ -112,7 +112,7 @@ export default function StudentAssignmentPage() {
       });
       setLastSaved(new Date());
       toast.success('Draft saved');
-    } catch (err) {
+    } catch {
       toast.error('Failed to save');
     } finally {
       setSaving(false);
@@ -138,7 +138,7 @@ export default function StudentAssignmentPage() {
       } else {
         toast.error(json.error || 'Failed to submit');
       }
-    } catch (err) {
+    } catch {
       toast.error('Failed to submit assignment');
     } finally {
       setSubmitting(false);
@@ -218,7 +218,7 @@ export default function StudentAssignmentPage() {
       </Card>
 
       {/* Graded result */}
-      {status === 'GRADED' && assignment.submission?.score !== null && (
+      {status === 'GRADED' && assignment.submission && assignment.submission.score !== null && (
         <Card className="border-emerald-200 bg-emerald-50">
           <CardContent className="py-6">
             <div className="flex items-center justify-between">

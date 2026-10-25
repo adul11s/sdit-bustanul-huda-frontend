@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../lib/auth-context';
 import DashboardLayout from '../../components/layout/DashboardLayout';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../../../components/ui/card';
 import { Badge } from '../../../components/ui/badge';
@@ -18,7 +17,6 @@ interface StudentProfileData {
 }
 
 export default function StudentProfilePage() {
-  const { user } = useAuth();
   const [data, setData] = useState<StudentProfileData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -71,15 +69,6 @@ export default function StudentProfilePage() {
   const avgGrade = grades.length > 0
     ? (grades.reduce((sum, g) => sum + g.value, 0) / grades.length).toFixed(1)
     : '0';
-
-  const statusIcon = (status: string) => {
-    switch (status) {
-      case 'PRESENT': return <CheckCircle className="w-4 h-4 text-emerald-500" />;
-      case 'ABSENT': return <XCircle className="w-4 h-4 text-red-500" />;
-      case 'SICK': return <AlertCircle className="w-4 h-4 text-amber-500" />;
-      default: return <AlertCircle className="w-4 h-4 text-slate-400" />;
-    }
-  };
 
   const statusBadge = (status: string) => {
     switch (status) {

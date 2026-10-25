@@ -1,4 +1,3 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { STATS } from '../data/school-data';
 
 export function StatsBanner() {

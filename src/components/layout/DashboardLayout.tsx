@@ -1,7 +1,6 @@
 import React from "react";
 import { SidebarProvider, SidebarTrigger, SidebarInset } from "../../../components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../../../components/ui/breadcrumb";
 import { useAuth } from "../../lib/auth-context";
 import { Badge } from "../../../components/ui/badge";
 

@@ -67,7 +67,7 @@ export default function AdminStudentManagementPage() {
       const res = await fetch("/api/admin/class-levels");
       const data = await res.json();
       if (data.success) setLevels(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load classes");
     }
   };
@@ -77,7 +77,7 @@ export default function AdminStudentManagementPage() {
       const res = await fetch("/api/admin/students/unassigned");
       const data = await res.json();
       if (data.success) setUnassigned(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load unassigned students");
     } finally {
       setLoading(false);
@@ -90,7 +90,7 @@ export default function AdminStudentManagementPage() {
       const res = await fetch(`/api/admin/classes/${selectedClassId}/students`);
       const data = await res.json();
       if (data.success) setClassStudents(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load class students");
     } finally {
       setLoading(false);
@@ -114,7 +114,7 @@ export default function AdminStudentManagementPage() {
       } else {
         toast.error(data.error || "Failed to assign student");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to assign student");
     }
   };
@@ -136,7 +136,7 @@ export default function AdminStudentManagementPage() {
       } else {
         toast.error(data.error || "Failed to transfer student");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to transfer student");
     }
   };
@@ -147,7 +147,7 @@ export default function AdminStudentManagementPage() {
       const res = await fetch(`/api/admin/students/${studentId}/transfer-history`);
       const data = await res.json();
       if (data.success) setHistory(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load history");
     } finally {
       setHistoryLoading(false);
@@ -177,7 +177,7 @@ export default function AdminStudentManagementPage() {
         <p className="text-slate-500 mt-1">Assign and transfer students between classes</p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v ?? '')}>
         <TabsList>
           <TabsTrigger value="unassigned">Unassigned Students</TabsTrigger>
           <TabsTrigger value="rosters">Class Rosters</TabsTrigger>
@@ -200,7 +200,7 @@ export default function AdminStudentManagementPage() {
                     <div className="grid gap-4 py-4">
                       <div>
                         <Label>Student</Label>
-                        <Select value={assignForm.studentId} onValueChange={(v) => setAssignForm({ ...assignForm, studentId: v })}>
+                        <Select value={assignForm.studentId} onValueChange={(v) => setAssignForm({ ...assignForm, studentId: v ?? '' })}>
                           <SelectTrigger className="mt-2"><SelectValue placeholder="Select student">{unassigned.find(s => s.id === assignForm.studentId)?.user.name}</SelectValue></SelectTrigger>
                           <SelectContent>
                             {unassigned.map((s) => (
@@ -211,7 +211,7 @@ export default function AdminStudentManagementPage() {
                       </div>
                       <div>
                         <Label>Class</Label>
-                        <Select value={assignForm.classId} onValueChange={(v) => setAssignForm({ ...assignForm, classId: v })}>
+                        <Select value={assignForm.classId} onValueChange={(v) => setAssignForm({ ...assignForm, classId: v ?? '' })}>
                           <SelectTrigger className="mt-2"><SelectValue placeholder="Select class">{allClasses.find(c => c.id === assignForm.classId)?.levelName} - {allClasses.find(c => c.id === assignForm.classId)?.name}</SelectValue></SelectTrigger>
                           <SelectContent>
                             {allClasses.map((c) => (
@@ -264,7 +264,7 @@ export default function AdminStudentManagementPage() {
               <CardDescription>Select a class to view and manage its students</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Select value={selectedClassId} onValueChange={setSelectedClassId}>
+              <Select value={selectedClassId} onValueChange={(v) => setSelectedClassId(v ?? '')}>
                 <SelectTrigger className="w-72"><SelectValue placeholder="Select class">{allClasses.find(c => c.id === selectedClassId)?.levelName} - {allClasses.find(c => c.id === selectedClassId)?.name}</SelectValue></SelectTrigger>
                 <SelectContent>
                   {allClasses.map((c) => (
@@ -330,7 +330,7 @@ export default function AdminStudentManagementPage() {
             <div className="grid gap-4 py-4">
               <div>
                 <Label>Student</Label>
-                <Select value={transferForm.studentId} onValueChange={(v) => setTransferForm({ ...transferForm, studentId: v })}>
+                <Select value={transferForm.studentId} onValueChange={(v) => setTransferForm({ ...transferForm, studentId: v ?? '' })}>
                   <SelectTrigger className="mt-2"><SelectValue placeholder="Select student">{classStudents.find(s => s.id === transferForm.studentId)?.user.name}</SelectValue></SelectTrigger>
                   <SelectContent>
                     {classStudents.map((s) => (
@@ -341,7 +341,7 @@ export default function AdminStudentManagementPage() {
               </div>
               <div>
                 <Label>To Class (same grade level only)</Label>
-                <Select value={transferForm.toClassId} onValueChange={(v) => setTransferForm({ ...transferForm, toClassId: v })}>
+                <Select value={transferForm.toClassId} onValueChange={(v) => setTransferForm({ ...transferForm, toClassId: v ?? '' })}>
                   <SelectTrigger className="mt-2"><SelectValue placeholder="Select target class">{allClasses.find(c => c.id === transferForm.toClassId)?.levelName} - {allClasses.find(c => c.id === transferForm.toClassId)?.name}</SelectValue></SelectTrigger>
                   <SelectContent>
                     {allClasses

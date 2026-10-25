@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '../../components/layout/DashboardLayout';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../../../components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table';
-import { Loader2, Users, TrendingUp, Calendar, CreditCard, GraduationCap, Eye, ArrowLeft, BookOpen, FileText } from 'lucide-react';
+import { Loader2, Users, TrendingUp, Calendar, CreditCard, GraduationCap, Eye, ArrowLeft, BookOpen } from 'lucide-react';
 
 interface Student {
   id: string;

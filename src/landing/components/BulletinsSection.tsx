@@ -1,4 +1,4 @@
-import { Calendar, ArrowRight, Newspaper } from 'lucide-react';
+import { Calendar, Newspaper } from 'lucide-react';
 import { useBulletins } from '../hooks/useBulletins';
 import { format } from 'date-fns';
 

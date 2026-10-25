@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { FOOTER_LINKS, SCHOOL_NAME } from '../data/school-data';
+import { FOOTER_LINKS } from '../data/school-data';
 
 const SOCIAL = [
   { icon: 'facebook', href: '#', label: 'Facebook' },

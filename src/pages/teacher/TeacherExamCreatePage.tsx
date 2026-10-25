@@ -142,7 +142,7 @@ export default function TeacherExamCreatePage() {
       } else {
         setFileErrors(json.errors || ['Failed to parse file']);
       }
-    } catch (err) {
+    } catch {
       toast.error('Failed to upload file');
     }
   };
@@ -234,8 +234,6 @@ export default function TeacherExamCreatePage() {
       setLoading(false);
     }
   };
-
-  const totalScore = questions.reduce((sum, q) => sum + q.score, 0);
 
   return (
     <DashboardLayout>

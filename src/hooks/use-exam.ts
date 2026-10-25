@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useAuth } from '../lib/auth-context';
 import { 
   IExam, 
   IQuestion, 
@@ -8,8 +7,6 @@ import {
   IPaginatedResponse,
   ICreateExamDTO,
   ICreateQuestionDTO,
-  GradingStatus,
-  SubmissionStatus,
   QuestionType,
   ExamType
 } from '../interfaces/exam.types';
@@ -236,7 +233,6 @@ export function useExamTimer(timeLimit: number, submissionId: string, onTimeUp: 
 }
 
 export function useStudentExam(examId: string) {
-  const { user } = useAuth();
   const [submission, setSubmission] = useState<ISubmission | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

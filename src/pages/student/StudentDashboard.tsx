@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "../../../components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../../../components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../components/ui/table";
 import { toast } from "sonner";
-import { Loader2, BookOpen, Calendar, FileText, GraduationCap, DollarSign, Bell, TrendingUp } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 
 interface StudentProfile {
@@ -104,7 +104,7 @@ export default function StudentDashboard() {
       ]);
       const profileData = await profileRes.json();
       if (profileData.success) setProfile(profileData.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load data");
     } finally {
       setLoading(false);
@@ -138,7 +138,7 @@ export default function StudentDashboard() {
       if (billingData.success) { setBilling(billingData.data); setInvoices(billingData.data.invoices || []); }
       if (bulletinsData.success) setBulletins(bulletinsData.data);
       if (rankingData.success) setMyRank(rankingData.data.myRank);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load student data");
     }
   };

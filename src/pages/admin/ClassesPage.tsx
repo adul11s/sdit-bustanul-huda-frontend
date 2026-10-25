@@ -8,8 +8,7 @@ import { Label } from "../../../components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../components/ui/table";
 import { toast } from "sonner";
-import { Plus, Loader2, Trash2, GraduationCap, Users, Edit, Eye } from "lucide-react";
-import DashboardLayout from "../../components/layout/DashboardLayout";
+import { Plus, Loader2, GraduationCap, Edit, Eye } from "lucide-react";
 
 interface ClassLevel {
   id: string;
@@ -58,7 +57,7 @@ export default function ClassesPage() {
       const res = await fetch("/api/admin/class-levels");
       const data = await res.json();
       if (data.success) setLevels(data.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load classes");
     } finally {
       setLoading(false);
@@ -75,7 +74,7 @@ export default function ClassesPage() {
           .map((u: any) => ({ id: u.teacher.id, user: { name: u.name } }));
         setTeachers(teacherList);
       }
-    } catch (error) {
+    } catch {
       console.error("Failed to load teachers");
     }
   };
@@ -93,7 +92,7 @@ export default function ClassesPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to create level");
     }
   };
@@ -111,7 +110,7 @@ export default function ClassesPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to create class");
     }
   };
@@ -138,7 +137,7 @@ export default function ClassesPage() {
       } else {
         toast.error(data.error || "Failed to update");
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to update homeroom teacher");
     }
   };
@@ -151,7 +150,7 @@ export default function ClassesPage() {
       const res = await fetch(`/api/admin/classes/${classId}/students`);
       const data = await res.json();
       if (data.success) setClassStudents(data.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load students");
     }
   };
@@ -182,7 +181,7 @@ export default function ClassesPage() {
                 <div className="grid gap-4 py-4">
                   <div><Label>Class Name</Label><Input placeholder="e.g. 1A" value={newClassData.name} onChange={(e) => setNewClassData({ ...newClassData, name: e.target.value })} className="mt-2" /></div>
                   <div><Label>Grade Level</Label>
-                    <Select value={newClassData.levelId} onValueChange={(value) => setNewClassData({ ...newClassData, levelId: value })}>
+                    <Select value={newClassData.levelId} onValueChange={(value) => setNewClassData({ ...newClassData, levelId: value ?? '' })}>
                       <SelectTrigger className="mt-2"><SelectValue placeholder="Select grade level">{levels.find(l => l.id === newClassData.levelId)?.name}</SelectValue></SelectTrigger>
                       <SelectContent>{levels.map((level) => (<SelectItem key={level.id} value={level.id}>{level.name}</SelectItem>))}</SelectContent>
                     </Select>
@@ -202,7 +201,7 @@ export default function ClassesPage() {
             <DialogHeader><DialogTitle>Edit Homeroom Teacher</DialogTitle></DialogHeader>
             <div className="py-4">
               <Label>Select Teacher</Label>
-              <Select value={homeroomTeacherId} onValueChange={setHomeroomTeacherId}>
+              <Select value={homeroomTeacherId} onValueChange={(v) => setHomeroomTeacherId(v ?? '')}>
                 <SelectTrigger className="mt-2"><SelectValue placeholder="Select teacher">{teachers.find(t => t.id === homeroomTeacherId)?.user.name}</SelectValue></SelectTrigger>
                 <SelectContent>
                   {teachers.map((t) => (<SelectItem key={t.id} value={t.id}>{t.user.name}</SelectItem>))}

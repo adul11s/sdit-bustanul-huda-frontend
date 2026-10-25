@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import { Button } from "../../../components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "../../../components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "../../../components/ui/card";
 import { Input } from "../../../components/ui/input";
 import { Badge } from "../../../components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
@@ -33,7 +33,7 @@ export default function AcademicYearsPage() {
       const res = await fetch("/api/admin/academic-years");
       const data = await res.json();
       if (data.success) setYears(data.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load academic years");
     } finally {
       setLoading(false);
@@ -57,7 +57,7 @@ export default function AcademicYearsPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to create academic year");
     }
   };
@@ -72,7 +72,7 @@ export default function AcademicYearsPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to set current year");
     }
   };

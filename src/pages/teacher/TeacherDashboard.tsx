@@ -49,7 +49,7 @@ export default function TeacherDashboard() {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [exams, setExams] = useState<Exam[]>([]);
-  const [grades, setGrades] = useState<Grade[]>([]);
+  const [grades] = useState<Grade[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSubject, setSelectedSubject] = useState<string>("");
 
@@ -68,7 +68,7 @@ export default function TeacherDashboard() {
           setSelectedSubject(data.data[0].id);
         }
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to load subjects");
     } finally {
       setLoading(false);
@@ -90,7 +90,7 @@ export default function TeacherDashboard() {
       const [assignmentsData, examsData] = await Promise.all([assignmentsRes.json(), examsRes.json()]);
       if (assignmentsData.success) setAssignments(assignmentsData.data);
       if (examsData.success) setExams(examsData.data);
-    } catch (error) {
+    } catch {
       toast.error("Failed to load data");
     }
   };
@@ -113,7 +113,7 @@ export default function TeacherDashboard() {
             <h1 className="text-3xl font-bold text-slate-900">Teacher Dashboard</h1>
             <p className="text-slate-500 mt-1">Manage your subjects, assignments, and exams</p>
           </div>
-          <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+          <Select value={selectedSubject} onValueChange={(v) => setSelectedSubject(v ?? '')}>
             <SelectTrigger className="w-64">
               <SelectValue placeholder="Select subject">
                 {subjects.find(s => s.id === selectedSubject)?.name || "Select subject"}

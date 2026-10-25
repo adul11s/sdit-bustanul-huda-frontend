@@ -20,7 +20,6 @@ import {
   Quote,
   Undo,
   Redo,
-  Code,
 } from "lucide-react";
 
 interface RichTextEditorProps {

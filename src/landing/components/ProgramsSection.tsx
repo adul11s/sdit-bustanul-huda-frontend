@@ -18,8 +18,6 @@ const COLOR_MAP: Record<string, string> = {
   blue: 'bg-blue-100 text-blue-700',
 };
 
-const FEATURED_BG = 'bg-gradient-to-r from-emerald-800 to-teal-800';
-
 export function ProgramsSection() {
   useScrollReveal();
 

@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../..
 import { Label } from '../../../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 import { Textarea } from '../../../components/ui/textarea';
-import { Plus, FileText, ArrowLeft, Upload, Save } from 'lucide-react';
+import { Plus, ArrowLeft } from 'lucide-react';
 
 interface Subject {
   id: string;
@@ -46,7 +46,7 @@ export function ExamCreatePage({ subjects, onSuccess }: ExamFormProps) {
       } else {
         navigate(`/teacher/exams/${exam.id}`);
       }
-    } catch (err) {
+    } catch {
       console.error(error);
     }
   };
@@ -115,7 +115,7 @@ export function ExamCreatePage({ subjects, onSuccess }: ExamFormProps) {
                 <Label htmlFor="subject">Subject *</Label>
                 <Select
                   value={formData.subjectId}
-                  onValueChange={(value) => setFormData({ ...formData, subjectId: value })}
+                  onValueChange={(value) => setFormData({ ...formData, subjectId: value ?? '' })}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select subject">{subjects.find(s => s.id === formData.subjectId)?.name}</SelectValue>

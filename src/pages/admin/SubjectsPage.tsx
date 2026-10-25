@@ -51,7 +51,7 @@ export default function SubjectsPage() {
           .map((u: any) => ({ id: u.teacher.id, user: { name: u.name, email: u.email } }));
         setTeachers(teacherList);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to load data");
     } finally {
       setLoading(false);
@@ -71,7 +71,7 @@ export default function SubjectsPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to create subject");
     }
   };
@@ -92,7 +92,7 @@ export default function SubjectsPage() {
       } else {
         toast.error(data.error || "Failed to update subject");
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to update subject");
     }
   };
@@ -118,7 +118,7 @@ export default function SubjectsPage() {
                 <div><Label>Subject Name</Label><Input placeholder="e.g. Mathematics" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="mt-2" /></div>
                 <div><Label>Subject Code (Optional)</Label><Input placeholder="e.g. MATH" value={formData.code} onChange={(e) => setFormData({ ...formData, code: e.target.value })} className="mt-2" /></div>
                 <div><Label>Teacher</Label>
-                  <Select value={formData.teacherId} onValueChange={(value) => setFormData({ ...formData, teacherId: value })}>
+                  <Select value={formData.teacherId} onValueChange={(value) => setFormData({ ...formData, teacherId: value ?? '' })}>
                     <SelectTrigger className="mt-2"><SelectValue placeholder="Select teacher">{teachers.find(t => t.id === formData.teacherId)?.user.name}</SelectValue></SelectTrigger>
                     <SelectContent>{teachers.map((t) => (<SelectItem key={t.id} value={t.id}>{t.user.name}</SelectItem>))}</SelectContent>
                   </Select>
@@ -139,7 +139,7 @@ export default function SubjectsPage() {
               <div><Label>Subject Name</Label><Input value={editForm.name} onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} className="mt-2" /></div>
               <div><Label>Subject Code</Label><Input value={editForm.code} onChange={(e) => setEditForm({ ...editForm, code: e.target.value })} className="mt-2" /></div>
               <div><Label>Teacher</Label>
-                <Select value={editForm.teacherId} onValueChange={(value) => setEditForm({ ...editForm, teacherId: value })}>
+                <Select value={editForm.teacherId} onValueChange={(value) => setEditForm({ ...editForm, teacherId: value ?? '' })}>
                   <SelectTrigger className="mt-2"><SelectValue placeholder="Select teacher">{teachers.find(t => t.id === editForm.teacherId)?.user.name}</SelectValue></SelectTrigger>
                   <SelectContent>{teachers.map((t) => (<SelectItem key={t.id} value={t.id}>{t.user.name}</SelectItem>))}</SelectContent>
                 </Select>

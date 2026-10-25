@@ -63,6 +63,6 @@ Set `VITE_API_URL` in `.env` to point to the backend API URL.
 ## Known gaps
 
 - Belum ada Docker, seed data deterministik, atau video demo (live link & CI tersedia di atas).
-- TypeScript non-strict (strict hanya TODO untuk file baru); belum ada lint config.
+- TypeScript `strict: true` (0 error) dan ESLint flat config aktif; `npm run lint` = `eslint . && tsc --noEmit`, dijalankan di CI. Sisa 65 warning `@typescript-eslint/no-explicit-any` yang masih di-track (belum dijadikan error).
 - Belum ada threat model, authz matrix, atau audit log; auth masih sederhana.
 - Belum ada metrics/alerting/runbook; API proxy hanya untuk dev.

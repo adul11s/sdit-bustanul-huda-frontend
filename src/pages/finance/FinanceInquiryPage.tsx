@@ -32,7 +32,7 @@ export default function FinanceInquiryPage() {
       const res = await fetch("/api/finance/inquiries");
       const data = await res.json();
       if (data.success) setInquiries(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load inquiries");
     } finally {
       setLoading(false);
@@ -53,7 +53,7 @@ export default function FinanceInquiryPage() {
       } else {
         toast.error(data.error || "Failed to update status");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to update status");
     }
   };
@@ -117,7 +117,7 @@ export default function FinanceInquiryPage() {
                       {new Date(i.createdAt).toLocaleDateString()}
                     </TableCell>
                     <TableCell className="text-right">
-                      <Select value={i.status} onValueChange={(v) => updateStatus(i.id, v)}>
+                      <Select value={i.status} onValueChange={(v) => { if (v) updateStatus(i.id, v); }}>
                         <SelectTrigger className="w-32 ml-auto">
                           <SelectValue />
                         </SelectTrigger>

@@ -87,7 +87,7 @@ export default function CalendarPage() {
       const res = await fetch(endpoint);
       const data = await res.json();
       if (data.success) setEvents(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load calendar events");
     } finally {
       setLoading(false);
@@ -114,7 +114,7 @@ export default function CalendarPage() {
       } else {
         toast.error(data.error || "Failed to save");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to save event");
     }
   };
@@ -130,7 +130,7 @@ export default function CalendarPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to delete");
     }
   };
@@ -229,7 +229,7 @@ export default function CalendarPage() {
                     </div>
                     <div>
                       <Label>Type</Label>
-                      <Select value={form.type} onValueChange={(v) => setForm({ ...form, type: v })}>
+                      <Select value={form.type} onValueChange={(v) => setForm({ ...form, type: v ?? '' })}>
                         <SelectTrigger className="mt-2">
                           <SelectValue />
                         </SelectTrigger>

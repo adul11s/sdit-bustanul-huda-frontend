@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import DashboardLayout from '../../components/layout/DashboardLayout';
 import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
 import { Badge } from '../../../components/ui/badge';
-import { Loader2, Calendar, Clock, MapPin, Users } from 'lucide-react';
+import { Loader2, Calendar, Clock, MapPin } from 'lucide-react';
 
 interface ScheduleItem {
   id: string;

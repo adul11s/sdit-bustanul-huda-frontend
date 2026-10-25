@@ -12,7 +12,7 @@ import { BulletinPreview } from "../../components/BulletinPreview";
 import { AvatarUpload } from "../../../components/ui/avatar-upload";
 import { fileToBase64, validateImageFile } from "../../../lib/file-utils";
 import { toast } from "sonner";
-import { Loader2, Plus, Eye, Trash2, ImagePlus } from "lucide-react";
+import { Loader2, Eye, Trash2, ImagePlus } from "lucide-react";
 
 interface Bulletin {
   id: string;
@@ -62,7 +62,7 @@ export default function BulletinEditorPage() {
       const res = await fetch("/api/admin/bulletins");
       const data = await res.json();
       if (data.success) setBulletins(data.data);
-    } catch (err) {
+    } catch {
       toast.error("Failed to load bulletins");
     } finally {
       setLoading(false);
@@ -75,9 +75,9 @@ export default function BulletinEditorPage() {
 
   const handleSubmit = async (publish = false) => {
     try {
-      const { id, ...payload } = { ...form, isPublished: publish };
+      const { id: _id, ...rest } = { ...form, isPublished: publish };
       // Strip empty date strings before sending
-      if (payload.eventDate === "") payload.eventDate = null;
+      const payload = { ...rest, eventDate: rest.eventDate === "" ? null : rest.eventDate };
       const url = form.id ? `/api/admin/bulletins/${form.id}` : "/api/admin/bulletins";
       const method = form.id ? "PUT" : "POST";
 
@@ -95,7 +95,7 @@ export default function BulletinEditorPage() {
       } else {
         toast.error(data.error || "Failed to save");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to save bulletin");
     }
   };
@@ -111,7 +111,7 @@ export default function BulletinEditorPage() {
       } else {
         toast.error(data.error);
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to delete");
     }
   };
@@ -176,7 +176,7 @@ export default function BulletinEditorPage() {
         <p className="text-slate-500 mt-1">Create and manage school bulletins with rich content</p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v ?? '')}>
         <TabsList>
           <TabsTrigger value="list">All Bulletins</TabsTrigger>
           <TabsTrigger value="editor">{form.id ? "Edit Bulletin" : "Create Bulletin"}</TabsTrigger>
@@ -226,7 +226,7 @@ export default function BulletinEditorPage() {
                   </div>
                   <div>
                     <Label>Category</Label>
-                    <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
+                    <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v ?? '' })}>
                       <SelectTrigger className="mt-2"><SelectValue /></SelectTrigger>
                       <SelectContent>
                         {CATEGORIES.map((c) => (

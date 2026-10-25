@@ -8,9 +8,7 @@ import {
   IStudentAnswer,
   IPaginatedResponse,
   IExamFilters,
-  ISubmissionFilters,
-  GradingStatus,
-  SubmissionStatus
+  ISubmissionFilters
 } from '../interfaces/exam.types';
 
 const API_BASE = '/api/exam';
